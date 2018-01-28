@@ -1,3 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <?php
   //соединение с базой данных при помощи функции mysql_connect()
   //в аргументах функции укажите имя сервера, логин и пароль. 
