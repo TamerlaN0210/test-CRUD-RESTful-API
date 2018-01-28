@@ -1,0 +1,291 @@
+POST /author
+	description: создает новую запись в БД 
+	передаваемые данные в теле запроса
+	form-data:
+	-	name:fName
+		description: Имя автора
+		type:string
+	-	name:sName
+		description: Отчество автора
+		type:string
+	-	name:lName
+		description: Фамилия автора
+		type:string
+	responses:
+		201:
+			description: Запись об авторе успешно создана
+		204:
+			description: В запросе переданы не все данные для создания записи об авторе
+		500:
+			description: Ошибка при выподлении SQL-запроса
+GET  /author/
+	description: Возвращает список всех авторов из БД
+	responses:
+		200:
+			description: успешное выполнение операции, вернул json-массив с записями об авторах.
+			type: json-array
+			properties:
+				id:
+					description: номер записи в БД
+					type: integer
+				first name:
+					description: имя автора
+					type:string
+				second name:
+					description: отчество автора
+					type:string
+				last name:
+					description: фамилия автора
+					type:string
+
+GET  /author/{id}/
+	description: Возвращает запись об авторе с ID = id
+	responses:
+		200:
+			description: успешное выполнение операции, вернул запись об авторе.
+			type: json
+			properties:
+			-	name:id
+				description: номер записи в БД
+				type: integer
+			-	name:first name
+				description: имя автора
+				type:string
+			-	name: second name:
+				description: отчество автора
+				type:string
+			-	name: last name:
+				description: фамилия автора
+				type:string
+PUT /author/{id}/fName/{fname}
+	description: Изменяет имя автора в записи об авторе с ID = id
+		responses:
+			200:
+				description: успешное выполнение операции замены.
+PUT /author/{id}/sName/{sname}
+	description: Изменяет отчества автора в записи об авторе с ID = id
+		responses:
+			200:
+				description: успешное выполнение операции замены.
+PUT /author/{id}/lName/{lname}
+	description: Изменяет фамилию автора в записи об авторе с ID = id
+	responses:
+		200:
+			description: успешное выполнение операции замены.
+PUT /author/{id}/fName/{fname}/sName/{sname}
+	description: Изменяет имя и отчетво автора в записи об авторе с ID = id
+	responses:
+		200:
+			description: успешное выполнение операции замены.
+PUT /author/{id}/fName/{fname}lName/{lname}
+	description: Изменяет имя и фамилию автора в записи об авторе с ID = id
+	responses:
+		200:
+			description: успешное выполнение операции замены.
+PUT /author/{id}/sName/{fname}/lName/{lname}
+	description: Изменяет отчество и фамилию автора в записи об авторе с ID = id
+	responses:
+		200:
+			description: успешное выполнение операции замены.
+
+PUT /author/{id}/fName/{fname}/sName/{sname}/lName/{lname}
+	description: Изменяет имя, отчество и фамилию автора в записи об авторе с ID = id
+	responses:
+		200:
+			description: успешное выполнение операции замены.
+
+DELETE /author/{id}
+	description: Удаляет запись об авторе с ID = id
+	responses:
+		200:
+			description: успешное удаление записи.
+		500:
+			description: ошибка при выполнении  SQL-операции
+			type: string
+				description: описание ошибки SQL
+
+
+POST /book
+	description: создает запись о книге
+	передаваемые данные в теле запроса
+	form-data:
+	-	name: ISBN
+		description: ISBN номер книги
+		type:long-integer
+	-	name: author_id
+		description: id автора книги(из БД)
+		type:integer
+	-	name: title
+		description: название книги
+		type: string
+	responses:
+		201:
+			description: Запись о книге успешно создана
+		204:
+			description: В запросе переданы не все данные для создания записи о книге
+		500:
+			description: Ошибка при выподлении SQL-запроса
+			type:string
+				description: Информация об SQL-ошибке
+GET /book
+	description: Возвращает записи о всех книгах
+	response:
+		200:
+			description: Успешное выполнение запроса
+			type: json-array
+			properties:
+				-	name: id
+					description: id записи книги
+					type: integer
+				-	name: ISBN
+					description: ISBN номер книги
+					type:long-integer
+				-	name: author_id
+					description: id автора книги(из БД)
+					type:integer
+				-	name: title
+					description: название книги
+					type: string
+GET /book/{id}
+	description: Возвращает запись о книге с ID=id
+	response:
+		200:
+			description: Успешное выполнение запроса
+			type: json
+			properties:
+				-	name: id
+					description: id записи книги
+					type: integer
+				-	name: ISBN
+					description: ISBN номер книги
+					type:long-integer
+				-	name: author_id
+					description: id автора книги(из БД)
+					type:integer
+				-	name: title
+					description: название книги
+					type: string
+PUT book/{id}/author/{author_id}
+	descripton: изменяет id автора в записи о книге с ID=id на {author_id}
+	responses:
+		200:
+			description: успешная замена.
+		500:
+			description: ошибки при выполнении SQL-запроса
+			type:string
+			description: Информация об SQL-ошибке
+
+PUT book/{id}/isbn/{isbn}
+	descripton: изменяет isbn книги в записи о книге с ID=id на {isbn}
+	responses:
+		200:
+			description: успешная замена.
+		500:
+			description: ошибки при выполнении SQL-запроса
+			type:string
+			description: Информация об SQL-ошибке
+
+PUT book/{id}/title/{title}
+	descripton: изменяет название книги в записи о книге с ID=id на {title}
+	responses:
+		200:
+			description: успешная замена.
+		500:
+			description: ошибки при выполнении SQL-запроса
+			type:string
+			description: Информация об SQL-ошибке
+
+PUT book/{id}/author/{author_id}/isbn/{isbn}
+	descripton: изменяет id автора и ISBN в записи о книге с ID=id на {author_id} и {isbn}
+	responses:
+		200:
+			description: успешная замена.
+		500:
+			description: ошибки при выполнении SQL-запроса
+			type:string
+			description: Информация об SQL-ошибке
+PUT book/{id}/author/{author_id}/title/{title}
+	descripton: изменяет id автора и название книги в записи о книге с ID=id на {author_id} и {title}
+	responses:
+		200:
+			description: успешная замена.
+		500:
+			description: ошибки при выполнении SQL-запроса
+			type:string
+			description: Информация об SQL-ошибке
+PUT book/{id}/isbn/{isbn}/title/{title}
+	descripton: изменяет ISBN и название книги в записи о книге с ID=id на {isbn} и {title}
+	responses:
+		200:
+			description: успешная замена.
+		500:
+			description: ошибки при выполнении SQL-запроса
+			type:string
+			description: Информация об SQL-ошибке
+
+PUT book/{id}/author/{author_id}/isbn/{isbn}/title/{title}
+	descripton: изменяет id автора, ISBN и название книги в записи о книге с ID=id на {author_id}, {isbn} и {title}
+	responses:
+		200:
+			description: успешная замена.
+		500:
+			description: ошибки при выполнении SQL-запроса
+			type:string
+			description: Информация об SQL-ошибке
+
+DELETE /book/{id}
+	description: удаляет запись о книге с ID={id}
+	responses:
+		200:
+			description: успешное удаление записи
+		500:
+			description: ошибка при выполнении sql-запроса
+			type:string
+				description: Описание SQL-ошибки
+
+GET author/{id}/books
+	description: возвращает все книги автора с ID={id}
+	responses:
+		200:
+			description: успешное выполнение запроса
+			type: json-array
+			properties:
+				-	name: id
+					description: id записи книги
+					type: integer
+				-	name: ISBN
+					description: ISBN номер книги
+					type:long-integer
+				-	name: author_id
+					description: id автора книги(из БД)
+					type:integer
+				-	name: title
+					description: название книги
+					type: string
+		204:
+			description: В запросе не передан id автора для выполнения запроса
+		500:
+			description: ошибка при выполнении sql-запроса
+			type:string
+				description: Описание SQL-ошибки
+GET book/isbn/{isbn}
+	description: возвращает книгу с заданым ISBN номером
+	responses:
+		200:
+			description: Успешное выполнение запроса
+			type: json-array
+			properties:
+				-	name: id
+					description: id записи книги
+					type: integer
+				-	name: ISBN
+					description: ISBN номер книги
+					type:long-integer
+				-	name: author_id
+					description: id автора книги(из БД)
+					type:integer
+				-	name: title
+					description: название книги
+					type: string
+		204:
+			description: В запросе не передан ISBN книги для выполнения запроса
