@@ -1,0 +1,48 @@
+<IfModule dir_module>
+    DirectoryIndex index.php
+</IfModule>
+
+Options +FollowSymlinks
+RewriteEngine on
+
+# map neat URL to internal URL
+
+RewriteRule ^(author/?)$   		  RestController.php?url=$1&controller=author [nc,qsa]
+# POST create new author 
+RewriteRule ^(author/([0-9]+)/?)$   RestController.php?url=$1&author_id=$2&controller=author [nc,qsa]
+
+# GET and DELETE author
+RewriteRule ^(author/([0-9]+)/fname/([а-яА-ЯёЁa-zA-Z]+)/?)$ RestController.php?url=$1&author_id=$2&fName=$3&controller=author [nc,qsa]
+RewriteRule ^(author/([0-9]+)/sname/([а-яА-ЯёЁa-zA-Z]+)/?)$ RestController.php?url=$1&author_id=$2&sName=$3&controller=author [nc,qsa]
+RewriteRule ^(author/([0-9]+)/lname/([а-яА-ЯёЁa-zA-Z]+)/?)$ RestController.php?url=$1&author_id=$2&lName=$3&controller=author [nc,qsa]
+
+RewriteRule ^(author/([0-9]+)/fname/([а-яА-ЯёЁa-zA-Z]+)/sname/([а-яА-ЯёЁa-zA-Z]+)/?)$ RestController.php?url=$1&author_id=$2&fName=$3&sName=$4&controller=author [nc,qsa]
+RewriteRule ^(author/([0-9]+)/fname/([а-яА-ЯёЁa-zA-Z]+)/lname/([а-яА-ЯёЁa-zA-Z]+)/?)$ RestController.php?url=$1&author_id=$2&fName=$3&lName=$4&controller=author [nc,qsa]
+RewriteRule ^(author/([0-9]+)/sname/([а-яА-ЯёЁa-zA-Z]+)/lname/([а-яА-ЯёЁa-zA-Z]+)/?)$ RestController.php?url=$1&author_id=$2&sName=$3&lName=$4&controller=author [nc,qsa]
+
+RewriteRule ^(author/([0-9]+)/fname/([а-яА-ЯёЁa-zA-Z]+)/sname/([а-яА-ЯёЁa-zA-Z]+)/lname/([а-яА-ЯёЁa-zA-Z]+)/?)$ RestController.php?url=$1&author_id=$2&fName=$3&sName=$4&lName=$5&controller=author [nc,qsa]
+# PUT edit author
+
+
+RewriteRule ^book/?$   RestController.php?controller=book [nc,qsa]
+# POST books
+
+RewriteRule ^book/([0-9]+)/?$   RestController.php?book_id=$1&controller=book [nc,qsa]
+# GET and DELETE books
+
+RewriteRule ^book/([0-9]+)/author/([0-9]+)/?$   RestController.php?book_id=$1&author_id=$2&controller=book [nc,qsa]
+RewriteRule ^book/([0-9]+)/isbn/([0-9]+)/?$                RestController.php?book_id=$1&isbn=$2&controller=book [nc,qsa]
+RewriteRule ^book/([0-9]+)/title/([а-яА-ЯёЁa-zA-Z0-9\s]+)/?$ RestController.php?book_id=$1&title=$2&controller=book [nc,qsa]
+
+RewriteRule ^book/([0-9]+)/author/([0-9]+)/isbn/([0-9]+)/?$				   RestController.php?book_id=$1&author_id=$2&isbn=$3&controller=book [nc,qsa]
+RewriteRule ^book/([0-9]+)/author/([0-9]+)/title/([а-яА-ЯёЁa-zA-Z0-9\s]+)/?$ RestController.php?book_id=$1&author_id=$2&title=$3&controller=book [nc,qsa]
+RewriteRule ^book/([0-9]+)/isbn/([0-9]+)/title/([а-яА-ЯёЁa-zA-Z0-9\s]+)/?$   RestController.php?book_id=$1&isbn=$2&title=$3&controller=book [nc,qsa]
+
+RewriteRule ^book/([0-9]+)/author/([0-9]+)/isbn/([0-9]+)/title/([а-яА-ЯёЁa-zA-Z0-9\s]+)/?$	RestController.php?book_id=$1&author_id=$2&isbn=$3&title=$4&controller=book [nc,qsa]
+#PUT edit books
+
+RewriteRule ^author/([0-9]+)/books/?$   RestController.php?author_id=$1&controller=showBooksByAuthor [nc,qsa]
+# show all books
+
+RewriteRule ^book/isbn/([0-9]+)/?$   RestController.php?isbn=$1&controller=showBooksByIsbn [nc,qsa]
+# show book ISDN
